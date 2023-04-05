@@ -23,7 +23,7 @@ Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, fe
 }
 
 .site-header {
-	max-width: 1440px!important;
+
 	margin:0px;
 	padding:0px;
 	background-color:white;
@@ -52,6 +52,7 @@ Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, fe
 
 #menu-item-11 > a {
 	color:white;
+	line-height: 26px;
 }
 
 .menu-item {
@@ -85,7 +86,7 @@ Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, fe
 	padding: 21px 0px 20px 0px;
 }
 .site-footer {
-padding:0px;
+padding:115px 0px 0px 0px;
 background-color: white;
 }
 
