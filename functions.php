@@ -22,18 +22,15 @@ function hello_elementor_child_enqueue_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_scripts', 20 );
 
-//DEBUT REMPLACER FOOTER PAR TEMPLATE ID 24
-add_action( 'wp_footer', 'my_custom_footer' );
-function my_custom_footer() {
-    // Vérifier si l'emplacement de footer est défini dans Elementor
-    if ( function_exists( 'elementor_theme_do_location' ) && elementor_theme_do_location( 'footer' ) ) {
-        // Récupérer l'identifiant de votre modèle de footer Elementor
-        $template_id = 123; // Remplacer 123 par l'identifiant de votre modèle
-        // Afficher votre modèle de footer Elementor
-        echo '<div class="my-custom-footer">';
-        echo \Elementor\Plugin::$instance->frontend->get_builder_content( $template_id, true );
-        echo '</div>';
-    }
-}
+// Hook WP NAV MENU is user log in show admin page
 
-// DEBUT REMPLACER FOOTER PAR TEMPLATE ID 24
+add_filter( 'wp_nav_menu_items', 'add_extra_item_to_nav_menu', 10, 2 );
+function add_extra_item_to_nav_menu( $items, $args ) {
+    if (is_user_logged_in() && $args->theme_location === 'menu-1') {
+        $items .= '<li><a class="menu-item" href="'. admin_url() .'">Admin</a></li> <li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item menu-item-11"><a href="http://planty.local/commander/" aria-current="page">Commander</a></li>';
+    }
+    elseif (!is_user_logged_in() && $args->theme_location === 'menu-1') {
+        $items .= '<li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item menu-item-11"><a href="http://planty.local/commander/" aria-current="page">Commander</a></li>';
+    }
+    return $items;
+}
